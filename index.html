@@ -7,1514 +7,1126 @@
 <meta name="description" content="נירו לוי – אמן החושים מספר 1 בישראל. מופעי מנטליזם לבר מצוות, חתונות, אירועי חברה ומסיבות. הוא יודע מה אתה חושב.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;800;900&family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;800;900&family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <style>
-/* ══════════════════════════════════════════
-   VARIABLES
-══════════════════════════════════════════ */
+/* ─── TOKENS ─────────────────────────────────────── */
 :root {
-  --bg:         #07050f;
-  --bg2:        #0c0818;
-  --purple:     #8b5cf6;
-  --purple-bright: #a78bfa;
-  --purple-dim: rgba(139,92,246,0.18);
-  --purple-glow:rgba(139,92,246,0.35);
-  --gold:       #e2b96a;
-  --gold-dim:   rgba(226,185,106,0.15);
-  --white:      #f5f3ff;
-  --gray:       #9ca3af;
-  --green-wa:   #25d366;
-  --font-head:  'Heebo', 'Secular One', sans-serif;
-  --font-body:  'Assistant', sans-serif;
-  --radius:     18px;
-  --glass-bg:   rgba(139,92,246,0.06);
-  --glass-border: rgba(139,92,246,0.20);
+  --bg:      #07050f;
+  --bg2:     #0d0a1a;
+  --pu:      #7c3aed;
+  --pu-l:    #a78bfa;
+  --pu-dim:  rgba(124,58,237,0.15);
+  --pu-glow: rgba(124,58,237,0.4);
+  --gold:    #d4af6e;
+  --gold-d:  rgba(212,175,110,0.12);
+  --white:   #f4f1ff;
+  --gray:    #9ca3af;
+  --wa:      #25d366;
+  --hd:      'Heebo', sans-serif;
+  --bd:      'Assistant', sans-serif;
+  --r:       16px;
 }
 
-/* ══════════════════════════════════════════
-   RESET & BASE
-══════════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--white);
-  overflow-x: hidden;
-  cursor: none;
+/* ─── RESET ──────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--bd);
+  background:var(--bg);
+  color:var(--white);
+  overflow-x:hidden;
+  cursor:none;
 }
-a { text-decoration: none; color: inherit; }
-img { max-width: 100%; display: block; }
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--purple-dim); border-radius: 3px; }
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--pu-dim);border-radius:2px}
 
-/* ══════════════════════════════════════════
-   GLOBAL BG ORBS
-══════════════════════════════════════════ */
-#bg-orbs {
-  position: fixed; inset: 0; z-index: 0;
-  pointer-events: none; overflow: hidden;
+/* ─── CURSOR ─────────────────────────────────────── */
+#cur{
+  position:fixed;width:14px;height:14px;
+  background:var(--pu-l);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  mix-blend-mode:difference;
+  transition:transform 0.1s;
 }
-.orb {
-  position: absolute; border-radius: 50%;
-  filter: blur(80px);
-  animation: orb-drift 18s ease-in-out infinite alternate;
-}
-.orb-1 {
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(109,40,217,0.28) 0%, transparent 70%);
-  top: -200px; right: -150px;
-  animation-duration: 20s;
-}
-.orb-2 {
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(139,92,246,0.22) 0%, transparent 70%);
-  bottom: 20%; left: -100px;
-  animation-duration: 15s; animation-delay: -7s;
-}
-.orb-3 {
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(226,185,106,0.10) 0%, transparent 70%);
-  top: 40%; right: 30%;
-  animation-duration: 25s; animation-delay: -3s;
-}
-@keyframes orb-drift {
-  0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(30px, -40px) scale(1.08); }
-  100% { transform: translate(-20px, 30px) scale(0.96); }
+#cur-ring{
+  position:fixed;width:40px;height:40px;
+  border:1px solid rgba(167,139,250,0.45);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:left 0.18s ease,top 0.18s ease;
 }
 
-/* ══════════════════════════════════════════
-   CURSOR
-══════════════════════════════════════════ */
-#cursor {
-  position: fixed; width: 18px; height: 18px;
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%,-50%);
-  transition: transform 0.12s ease;
+/* ─── BG ORBS ────────────────────────────────────── */
+#orbs{
+  position:fixed;inset:0;z-index:0;
+  pointer-events:none;overflow:hidden;
 }
-#cursor svg { width: 100%; height: 100%; }
-#cursor-trail {
-  position: fixed; width: 36px; height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(139,92,246,0.5);
-  pointer-events: none; z-index: 9998;
-  transform: translate(-50%,-50%);
-  transition: left 0.15s ease, top 0.15s ease, opacity 0.3s;
-}
-body:hover #cursor-trail { opacity: 1; }
-
-/* ══════════════════════════════════════════
-   FLOATING WHATSAPP
-══════════════════════════════════════════ */
-#float-wa {
-  position: fixed; bottom: 30px; left: 30px;
-  z-index: 1000; width: 62px; height: 62px;
-  background: var(--green-wa);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 0 0 0 rgba(37,211,102,0.5);
-  animation: wa-pulse 2.5s infinite;
-  cursor: none; transition: transform 0.2s;
-}
-#float-wa:hover { transform: scale(1.1); }
-#float-wa svg { width: 32px; height: 32px; fill: #fff; }
-@keyframes wa-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
-  70%  { box-shadow: 0 0 0 18px rgba(37,211,102,0); }
-  100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:drift 20s ease-in-out infinite alternate}
+.o1{width:700px;height:700px;background:radial-gradient(circle,rgba(100,30,220,0.3) 0%,transparent 70%);top:-180px;right:-120px;animation-duration:22s}
+.o2{width:500px;height:500px;background:radial-gradient(circle,rgba(124,58,237,0.22) 0%,transparent 70%);bottom:15%;left:-100px;animation-duration:16s;animation-delay:-8s}
+.o3{width:350px;height:350px;background:radial-gradient(circle,rgba(212,175,110,0.12) 0%,transparent 70%);top:45%;right:35%;animation-duration:28s;animation-delay:-4s}
+@keyframes drift{
+  0%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(28px,-38px) scale(1.07)}
+  100%{transform:translate(-18px,26px) scale(0.95)}
 }
 
-/* ══════════════════════════════════════════
-   NAV
-══════════════════════════════════════════ */
-nav {
-  position: fixed; top: 0; right: 0; left: 0;
-  z-index: 900;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 6%;
-  transition: all 0.4s;
+/* ─── WA FLOAT ───────────────────────────────────── */
+#wa-btn{
+  position:fixed;bottom:28px;left:28px;z-index:1000;
+  width:60px;height:60px;
+  background:var(--wa);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 0 rgba(37,211,102,0.5);
+  animation:wa-pulse 2.5s infinite;
+  cursor:none;transition:transform 0.2s;
 }
-nav.scrolled {
-  background: rgba(7,5,15,0.88);
-  backdrop-filter: blur(20px);
-  padding: 14px 6%;
-  border-bottom: 1px solid rgba(139,92,246,0.12);
-}
-.nav-logo {
-  font-family: var(--font-head);
-  font-size: 1.25rem;
-  color: var(--white);
-  letter-spacing: 1px;
-}
-.nav-logo span { color: var(--purple-bright); }
-.nav-links { display: flex; gap: 34px; align-items: center; list-style: none; }
-.nav-links a {
-  font-size: 0.92rem;
-  color: rgba(245,243,255,0.65);
-  letter-spacing: 0.5px;
-  transition: color 0.2s;
-  position: relative;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute; bottom: -4px; right: 0;
-  width: 0; height: 1px;
-  background: var(--purple-bright);
-  transition: width 0.3s;
-}
-.nav-links a:hover { color: var(--white); }
-.nav-links a:hover::after { width: 100%; }
-.btn-wa-nav {
-  background: transparent;
-  border: 1.5px solid var(--green-wa);
-  color: var(--green-wa);
-  padding: 8px 20px;
-  border-radius: 50px;
-  font-size: 0.88rem;
-  font-weight: 700;
-  display: flex; align-items: center; gap: 6px;
-  transition: background 0.2s, transform 0.2s;
-}
-.btn-wa-nav:hover { background: rgba(37,211,102,0.1); transform: scale(1.04); }
-
-/* ══════════════════════════════════════════
-   HERO
-══════════════════════════════════════════ */
-#hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex; align-items: center;
-  overflow: hidden;
-}
-#particles-canvas {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+#wa-btn:hover{transform:scale(1.12)}
+#wa-btn svg{width:30px;height:30px;fill:#fff}
+@keyframes wa-pulse{
+  0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5)}
+  70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}
+  100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
 }
 
-/* ── Full-bleed image covers entire hero ── */
-.hero-img-side {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
+/* ─── NAV ────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;right:0;left:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 6%;
+  transition:all 0.4s;
 }
-.hero-img-side img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center top;
+nav.scrolled{
+  background:rgba(7,5,15,0.9);
+  backdrop-filter:blur(20px);
+  padding:14px 6%;
+  border-bottom:1px solid rgba(124,58,237,0.12);
 }
-.hero-img-side-placeholder {
-  width: 100%; height: 100%;
-  background: linear-gradient(160deg, #1e1040 0%, #2d1b6e 40%, #150d35 100%);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 6rem; color: var(--purple-dim);
+.nav-logo{
+  font-family:var(--hd);font-size:1.2rem;
+  color:var(--white);letter-spacing:1px;
 }
+.nav-logo span{color:var(--pu-l)}
+.nav-links{display:flex;gap:32px;align-items:center;list-style:none}
+.nav-links a{
+  font-size:0.9rem;color:rgba(244,241,255,0.55);
+  letter-spacing:0.5px;transition:color 0.2s;
+  position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;right:0;
+  width:0;height:1px;background:var(--pu-l);transition:width 0.3s;
+}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{width:100%}
+.btn-wa-nav{
+  background:transparent;border:1.5px solid var(--wa);
+  color:var(--wa);padding:8px 20px;border-radius:50px;
+  font-size:0.87rem;font-weight:700;
+  display:flex;align-items:center;gap:6px;
+  transition:background 0.2s,transform 0.2s;cursor:none;
+}
+.btn-wa-nav:hover{background:rgba(37,211,102,0.1);transform:scale(1.04)}
 
-/* ── Gradient overlay: dark RIGHT side (RTL = text side), image shows LEFT ── */
-.hero-img-fade {
-  position: absolute; inset: 0; z-index: 3;
+/* ─── HERO ───────────────────────────────────────── */
+#hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;overflow:hidden;
+}
+.hero-img{position:absolute;inset:0;z-index:2}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-img-fallback{
+  width:100%;height:100%;
+  background:linear-gradient(160deg,#1a0e3d,#2d1b6e,#12092a);
+  display:flex;align-items:center;justify-content:center;
+  font-size:8rem;color:var(--pu-dim);
+}
+.hero-fade{
+  position:absolute;inset:0;z-index:3;
   background:
-    /* dark on the right where text lives */
-    linear-gradient(to left,
-      rgba(7,5,15,0.97) 0%,
-      rgba(7,5,15,0.85) 30%,
-      rgba(7,5,15,0.5)  55%,
-      rgba(7,5,15,0.15) 75%,
-      transparent       100%
-    ),
-    /* dark bottom always */
-    linear-gradient(to top,
-      rgba(7,5,15,0.9) 0%,
-      transparent 25%
-    ),
-    /* dark top bar for nav */
-    linear-gradient(to bottom,
-      rgba(7,5,15,0.6) 0%,
-      transparent 15%
-    );
+    linear-gradient(to left,rgba(7,5,15,0.97) 0%,rgba(7,5,15,0.88) 28%,rgba(7,5,15,0.5) 52%,rgba(7,5,15,0.12) 72%,transparent 100%),
+    linear-gradient(to top,rgba(7,5,15,0.92) 0%,transparent 28%),
+    linear-gradient(to bottom,rgba(7,5,15,0.65) 0%,transparent 18%);
+}
+.hero-content{
+  position:absolute;top:0;right:0;bottom:0;z-index:4;
+  width:54%;display:flex;flex-direction:column;justify-content:center;
+  padding:100px 5% 80px 3%;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:0.72rem;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;
+  color:var(--pu-l);margin-bottom:24px;
+}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--pu-l)}
+.hero-name{
+  font-family:var(--hd);
+  font-size:clamp(4.8rem,9.5vw,9rem);
+  font-weight:900;line-height:0.9;
+  color:var(--white);letter-spacing:-3px;
+  margin-bottom:8px;
+}
+.hero-name-gold{
+  display:block;
+  font-family:var(--hd);
+  font-size:clamp(1.6rem,3.2vw,2.6rem);
+  font-weight:700;color:var(--gold);
+  letter-spacing:2px;margin-bottom:26px;
+  line-height:1.3;
+}
+.hero-tagline{
+  font-size:clamp(0.97rem,1.6vw,1.18rem);
+  color:rgba(244,241,255,0.55);
+  line-height:1.75;margin-bottom:44px;
+  max-width:430px;font-weight:300;
+}
+.hero-tagline strong{color:var(--white);font-weight:600}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-main{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 34px;
+  background:linear-gradient(135deg,var(--pu),#5b21b6);
+  color:#fff;font-family:var(--bd);font-size:1rem;font-weight:700;
+  border-radius:50px;border:none;cursor:none;
+  box-shadow:0 0 40px rgba(100,30,220,0.5),0 4px 20px rgba(0,0,0,0.4);
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.btn-main:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 60px rgba(124,58,237,0.7),0 8px 30px rgba(0,0,0,0.5);
+}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 34px;background:transparent;
+  color:var(--wa);font-family:var(--bd);font-size:1rem;font-weight:700;
+  border-radius:50px;border:1.5px solid var(--wa);cursor:none;
+  transition:background 0.2s,transform 0.2s;
+}
+.btn-wa:hover{background:rgba(37,211,102,0.1);transform:translateY(-3px)}
+.hero-stats{
+  display:flex;gap:36px;margin-top:52px;
+  padding-top:36px;border-top:1px solid rgba(124,58,237,0.18);
+}
+.stat-num{
+  font-family:var(--hd);font-size:2rem;color:var(--white);
+  line-height:1;display:block;
+}
+.stat-num em{color:var(--pu-l);font-style:normal}
+.stat-lbl{font-size:0.74rem;color:var(--gray);letter-spacing:1px;margin-top:5px;display:block}
+.hero-scroll{
+  position:absolute;bottom:30px;left:6%;z-index:4;
+  display:flex;align-items:center;gap:10px;
+  color:rgba(244,241,255,0.3);font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;
+}
+.scroll-line{
+  width:36px;height:1px;
+  background:linear-gradient(to left,var(--pu),transparent);
+  animation:sline 2s ease-in-out infinite;
+}
+@keyframes sline{0%,100%{transform:scaleX(1);opacity:0.5}50%{transform:scaleX(1.4);opacity:1}}
+
+/* ─── SECTION BASE ───────────────────────────────── */
+.sec{padding:120px 6%;position:relative;z-index:2}
+.sec-wide{padding-right:6%;padding-left:6%}
+
+/* ─── GIANT TWO-TONE HEADING ─────────────────────── */
+.giant-head{
+  font-family:var(--hd);
+  font-size:clamp(2.4rem,5.2vw,5.2rem);
+  line-height:1.05;
+  letter-spacing:-0.025em;
+  font-weight:900;
+  margin-bottom:12px;
+}
+.giant-head .line1{display:block;color:var(--white)}
+.giant-head .line2{display:block;color:var(--gold)}
+.giant-head .line2 span{color:var(--pu-l)}
+.sec-sub{
+  font-size:1.05rem;color:rgba(244,241,255,0.45);
+  line-height:1.75;max-width:560px;font-weight:300;
 }
 
-/* ── Text anchored to the RIGHT (RTL start) ── */
-.hero-content {
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  z-index: 4;
-  width: 55%;
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 100px 5% 80px 3%;
-}
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--purple-bright);
-  margin-bottom: 28px;
-}
-.hero-eyebrow::before {
-  content: '';
-  display: block;
-  width: 30px; height: 1px;
-  background: var(--purple-bright);
-}
-.hero-name {
-  font-family: var(--font-head);
-  font-size: clamp(5rem, 10vw, 9.5rem);
-  font-weight: 900;
-  line-height: 0.9;
-  color: var(--white);
-  letter-spacing: -2px;
-  margin-bottom: 10px;
-  position: relative;
-}
-.hero-subtitle-line {
-  font-family: var(--font-head);
-  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
-  color: var(--gold);
-  letter-spacing: 1px;
-  margin-bottom: 28px;
-  line-height: 1.2;
-}
-.hero-tagline {
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
-  color: rgba(245,243,255,0.6);
-  line-height: 1.7;
-  margin-bottom: 48px;
-  max-width: 460px;
-  font-weight: 300;
-}
-.hero-tagline strong { color: var(--white); font-weight: 600; }
-.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+/* ─── REVEAL ─────────────────────────────────────── */
+.rv{opacity:0;transform:translateY(32px)}
 
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 16px 36px;
-  background: linear-gradient(135deg, var(--purple), #6d28d9);
-  color: #fff;
-  font-family: var(--font-body);
-  font-size: 1rem; font-weight: 700;
-  border-radius: 50px; border: none; cursor: none;
-  box-shadow: 0 0 40px rgba(109,40,217,0.45), 0 4px 20px rgba(0,0,0,0.4);
-  transition: transform 0.2s, box-shadow 0.2s;
-  letter-spacing: 0.3px;
+/* ─── PROOF BAR ──────────────────────────────────── */
+#proof{
+  position:relative;z-index:2;padding:28px 0;
+  background:rgba(124,58,237,0.04);
+  border-top:1px solid rgba(124,58,237,0.1);
+  border-bottom:1px solid rgba(124,58,237,0.1);
+  overflow:hidden;
 }
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 60px rgba(139,92,246,0.65), 0 8px 30px rgba(0,0,0,0.5);
+.proof-label{
+  text-align:center;font-size:0.65rem;letter-spacing:5px;
+  text-transform:uppercase;color:rgba(124,58,237,0.55);margin-bottom:16px;
 }
-.btn-secondary {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 16px 36px;
-  background: transparent;
-  color: var(--green-wa);
-  font-family: var(--font-body);
-  font-size: 1rem; font-weight: 700;
-  border-radius: 50px;
-  border: 1.5px solid var(--green-wa);
-  cursor: none;
-  transition: background 0.2s, transform 0.2s;
-  letter-spacing: 0.3px;
+.mq-wrap{overflow:hidden;-webkit-mask:linear-gradient(to left,transparent 0,#000 12%,#000 88%,transparent 100%);mask:linear-gradient(to left,transparent 0,#000 12%,#000 88%,transparent 100%)}
+.mq{display:flex;gap:48px;width:max-content;animation:mqs 22s linear infinite;align-items:center}
+.mq:hover{animation-play-state:paused}
+.mq-item{
+  white-space:nowrap;font-family:var(--hd);font-size:0.95rem;
+  color:rgba(244,241,255,0.22);letter-spacing:0.5px;
+  transition:color 0.3s;padding:0 6px;
 }
-.btn-secondary:hover { background: rgba(37,211,102,0.1); transform: translateY(-3px); }
+.mq-item:hover{color:var(--gold)}
+.mq-sep{color:var(--pu);opacity:0.3;font-size:0.6rem}
+@keyframes mqs{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-.hero-stats {
-  display: flex; gap: 40px; margin-top: 56px;
-  padding-top: 40px;
-  border-top: 1px solid rgba(139,92,246,0.18);
+/* ─── TRICKS (3-COL CARDS) ───────────────────────── */
+#tricks{text-align:center}
+.tricks-head{margin-bottom:60px}
+.tricks-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;margin-top:8px;
 }
-.hero-stat-num {
-  font-family: var(--font-head);
-  font-size: 2.2rem;
-  color: var(--white);
-  line-height: 1;
-  display: block;
+.trick-card{
+  background:rgba(124,58,237,0.05);
+  border:1px solid rgba(124,58,237,0.2);
+  border-radius:var(--r);height:210px;
+  perspective:900px;cursor:none;
 }
-.hero-stat-num span { color: var(--purple-bright); }
-.hero-stat-label {
-  font-size: 0.78rem;
-  color: var(--gray);
-  letter-spacing: 1px;
-  margin-top: 5px;
-  display: block;
+.trick-inner{
+  width:100%;height:100%;position:relative;
+  transform-style:preserve-3d;
+  transition:transform 0.65s cubic-bezier(0.4,0,0.2,1);
 }
-.scroll-indicator {
-  position: absolute; bottom: 32px; left: 6%;
-  z-index: 4;
-  display: flex; align-items: center; gap: 10px;
-  color: rgba(245,243,255,0.35);
-  font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+.trick-card:hover .trick-inner{transform:rotateY(180deg)}
+.t-front,.t-back{
+  position:absolute;inset:0;backface-visibility:hidden;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:13px;
+  padding:24px;border-radius:var(--r);
 }
-.scroll-line {
-  width: 40px; height: 1px;
-  background: linear-gradient(to left, var(--purple), transparent);
-  animation: scroll-line 2s ease-in-out infinite;
+.t-back{
+  transform:rotateY(180deg);
+  background:linear-gradient(135deg,rgba(100,30,220,0.22),rgba(124,58,237,0.08));
+  border:1px solid rgba(124,58,237,0.32);
 }
-@keyframes scroll-line {
-  0%, 100% { transform: scaleX(1); opacity: 0.5; }
-  50% { transform: scaleX(1.3); opacity: 1; }
+.t-icon{
+  width:56px;height:56px;border-radius:14px;
+  background:rgba(124,58,237,0.12);
+  border:1px solid rgba(124,58,237,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.75rem;transition:background 0.3s;
 }
+.trick-card:hover .t-icon{background:rgba(124,58,237,0.22)}
+.t-name{font-family:var(--hd);font-size:1rem;color:var(--white)}
+.t-desc{font-size:0.85rem;color:rgba(244,241,255,0.6);line-height:1.6;text-align:center}
 
-/* GLITCH */
-.glitch {
-  position: relative; display: inline-block;
+/* ─── SHOWS (horizontal scrub, CSS sticky) ───────── */
+#shows-stage{
+  height:280svh;position:relative;z-index:2;
 }
-.glitch::before, .glitch::after {
-  content: attr(data-text);
-  position: absolute; top: 0; right: 0;
-  overflow: hidden;
+#shows-stick{
+  position:sticky;top:0;height:100svh;overflow:hidden;
 }
-.glitch::before {
-  color: var(--purple-bright);
-  animation: glitch1 4s infinite linear;
-  clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%);
+.shows-header{
+  position:absolute;top:0;right:6%;z-index:2;
+  padding-top:80px;
 }
-.glitch::after {
-  color: var(--gold);
-  animation: glitch2 4s infinite linear;
-  clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%);
+#shows-track{
+  display:flex;gap:24px;
+  position:absolute;top:50%;
+  transform:translateY(-50%);
+  padding:0 6%;will-change:transform;
 }
-@keyframes glitch1 {
-  0%,93%,100% { transform: translate(0); opacity: 0; }
-  94% { transform: translate(-4px, 1px); opacity: 1; }
-  97% { transform: translate(4px, -1px); opacity: 0.8; }
+.show-card{
+  flex:0 0 clamp(280px,30vw,420px);
+  height:clamp(320px,38vw,480px);
+  border-radius:24px;overflow:hidden;position:relative;
+  border:1px solid rgba(124,58,237,0.18);cursor:none;
 }
-@keyframes glitch2 {
-  0%,95%,100% { transform: translate(0); opacity: 0; }
-  96% { transform: translate(4px, 2px); opacity: 1; }
-  99% { transform: translate(-3px, -2px); opacity: 0.8; }
+.show-card-img{
+  position:absolute;inset:0;
 }
+.show-card-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.5s;
+}
+.show-card:hover .show-card-img img{transform:scale(1.04)}
+.show-card-fallback{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:5rem;
+}
+.show-card-over{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,rgba(7,5,15,0.95) 0%,rgba(7,5,15,0.5) 45%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:32px;
+}
+.sc-tag{
+  display:inline-block;padding:4px 14px;
+  background:rgba(124,58,237,0.25);
+  border:1px solid rgba(124,58,237,0.35);
+  border-radius:50px;font-size:0.72rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--pu-l);margin-bottom:12px;
+}
+.sc-title{
+  font-family:var(--hd);font-size:1.35rem;
+  font-weight:800;color:var(--white);margin-bottom:8px;
+}
+.sc-desc{font-size:0.85rem;color:rgba(244,241,255,0.55);line-height:1.6}
 
-/* ══════════════════════════════════════════
-   SOCIAL PROOF BAR
-══════════════════════════════════════════ */
-#proof {
-  position: relative; z-index: 2;
-  padding: 32px 0;
-  background: rgba(139,92,246,0.04);
-  border-top: 1px solid rgba(139,92,246,0.12);
-  border-bottom: 1px solid rgba(139,92,246,0.12);
-  overflow: hidden;
+/* ─── TESTIMONIALS dual marquee ──────────────────── */
+#testimonials{
+  background:rgba(100,30,220,0.04);
+  border-top:1px solid rgba(124,58,237,0.1);
+  border-bottom:1px solid rgba(124,58,237,0.1);
 }
-.proof-label {
-  text-align: center;
-  font-size: 0.68rem;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: rgba(139,92,246,0.6);
-  margin-bottom: 18px;
+.testi-cols{
+  display:flex;gap:20px;margin-top:60px;height:520px;
+  overflow:hidden;
+  -webkit-mask:linear-gradient(to bottom,transparent 0,#000 10%,#000 90%,transparent 100%);
+  mask:linear-gradient(to bottom,transparent 0,#000 10%,#000 90%,transparent 100%);
 }
-.marquee-wrap { overflow: hidden; }
-.marquee {
-  display: flex; gap: 50px;
-  width: max-content;
-  animation: marquee-scroll 22s linear infinite;
-  align-items: center;
+.testi-lane{display:flex;flex-direction:column;gap:20px;flex:1}
+.testi-lane-a{animation:lane-up 18s linear infinite}
+.testi-lane-b{animation:lane-dn 24s linear infinite}
+.testi-lane:hover{animation-play-state:paused}
+@keyframes lane-up{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+@keyframes lane-dn{0%{transform:translateY(-50%)}100%{transform:translateY(0)}}
+.testi-card{
+  background:rgba(124,58,237,0.05);
+  border:1px solid rgba(124,58,237,0.18);
+  border-radius:var(--r);padding:28px 24px;
+  text-align:right;
 }
-.marquee:hover { animation-play-state: paused; }
-.marquee-item {
-  white-space: nowrap;
-  font-family: var(--font-head);
-  font-size: 1rem;
-  color: rgba(245,243,255,0.25);
-  letter-spacing: 1px;
-  transition: color 0.3s;
-  padding: 0 8px;
+.tc-stars{color:var(--gold);font-size:0.9rem;letter-spacing:3px;margin-bottom:14px}
+.tc-text{
+  font-size:0.92rem;color:rgba(244,241,255,0.65);
+  line-height:1.8;margin-bottom:18px;
+  font-style:italic;font-weight:300;
 }
-.marquee-item:hover { color: var(--gold); }
-.marquee-sep { color: var(--purple); opacity: 0.3; font-size: 0.7rem; }
-@keyframes marquee-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.tc-author{display:flex;align-items:center;gap:10px}
+.tc-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pu),#4c1d95);
+  border:1.5px solid rgba(124,58,237,0.35);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--hd);font-size:0.9rem;color:#fff;flex-shrink:0;
 }
+.tc-name{font-size:0.85rem;font-weight:700;color:var(--white)}
+.tc-place{font-size:0.72rem;color:var(--gray);margin-top:2px}
 
-/* ══════════════════════════════════════════
-   SECTION BASE
-══════════════════════════════════════════ */
-section { padding: 110px 6%; position: relative; z-index: 2; }
-.section-eyebrow {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 4px; text-transform: uppercase;
-  color: var(--purple-bright);
-  margin-bottom: 16px;
+/* ─── ABOUT ──────────────────────────────────────── */
+#about{
+  background:rgba(100,30,220,0.04);
+  border-top:1px solid rgba(124,58,237,0.1);
 }
-.section-eyebrow::before {
-  content: '';
-  display: block; width: 24px; height: 1px;
-  background: var(--purple-bright);
+.about-inner{display:flex;gap:80px;align-items:center}
+.about-photo{flex:0 0 400px;position:relative}
+.about-photo img{width:100%;border-radius:24px;object-fit:cover;position:relative;z-index:1}
+.about-photo-fallback{
+  width:100%;height:520px;border-radius:24px;
+  background:linear-gradient(160deg,#1e1040,#2d1b6e);
+  display:flex;align-items:center;justify-content:center;font-size:6rem;
+  position:relative;z-index:1;
 }
-.section-title {
-  font-family: var(--font-head);
-  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
-  line-height: 1.1;
-  color: var(--white);
-  margin-bottom: 18px;
-  letter-spacing: -0.5px;
+.about-glow{
+  position:absolute;inset:-24px;
+  background:radial-gradient(ellipse at center,rgba(100,30,220,0.32) 0%,transparent 70%);
+  border-radius:36px;z-index:0;
 }
-.section-title em { color: var(--gold); font-style: normal; }
-.section-sub {
-  font-size: 1.05rem;
-  color: rgba(245,243,255,0.5);
-  line-height: 1.75;
-  max-width: 560px;
-  font-weight: 300;
+.about-border{
+  position:absolute;inset:0;border-radius:24px;z-index:2;
+  border:1.5px solid transparent;
+  background:linear-gradient(135deg,rgba(124,58,237,0.5),rgba(212,175,110,0.3)) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:destination-out;
+  mask-composite:exclude;pointer-events:none;
 }
+.about-text{flex:1}
+.about-body{
+  font-size:1.05rem;color:rgba(244,241,255,0.58);
+  line-height:1.9;margin-bottom:48px;font-weight:300;
+}
+.about-body strong{color:var(--gold);font-weight:600}
+.counters{display:flex;gap:44px;flex-wrap:wrap}
+.cnt{position:relative}
+.cnt::after{content:'';display:block;width:22px;height:2px;background:linear-gradient(to left,var(--pu),transparent);margin-top:10px}
+.cnt-n{
+  font-family:var(--hd);font-size:2.8rem;line-height:1;display:block;
+  background:linear-gradient(135deg,var(--white),var(--pu-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.cnt-l{font-size:0.75rem;color:var(--gray);letter-spacing:1px;margin-top:5px;display:block}
 
-/* REVEAL */
-.reveal {
-  opacity: 0; transform: translateY(36px);
-  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+/* ─── PLAYING CARDS FLOAT ────────────────────────── */
+.card-float{
+  position:absolute;pointer-events:none;
+  width:52px;height:74px;border-radius:6px;
+  background:#fff;
+  border:1px solid rgba(200,200,200,0.5);
+  display:flex;align-items:flex-start;padding:5px;
+  font-family:Georgia,serif;font-weight:700;
+  box-shadow:0 8px 24px rgba(0,0,0,0.4);
+  animation:card-drift var(--cd,14s) ease-in-out infinite alternate;
+  opacity:0.18;
 }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-.reveal-delay-5 { transition-delay: 0.5s; }
-
-/* ══════════════════════════════════════════
-   TRICKS
-══════════════════════════════════════════ */
-#tricks { background: transparent; text-align: center; }
-.tricks-header { margin-bottom: 60px; }
-.tricks-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-.trick-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  height: 210px;
-  perspective: 900px;
-  cursor: none;
-}
-.trick-card-inner {
-  width: 100%; height: 100%;
-  position: relative; transform-style: preserve-3d;
-  transition: transform 0.65s cubic-bezier(0.4,0,0.2,1);
-}
-.trick-card:hover .trick-card-inner { transform: rotateY(180deg); }
-.trick-front, .trick-back {
-  position: absolute; inset: 0; backface-visibility: hidden;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 14px; padding: 24px;
-  border-radius: var(--radius);
-}
-.trick-back {
-  transform: rotateY(180deg);
-  background: linear-gradient(135deg, rgba(109,40,217,0.2), rgba(139,92,246,0.08));
-  border: 1px solid rgba(139,92,246,0.3);
-}
-.trick-icon-wrap {
-  width: 58px; height: 58px; border-radius: 16px;
-  background: var(--purple-dim);
-  border: 1px solid var(--glass-border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.8rem;
-  transition: background 0.3s;
-}
-.trick-card:hover .trick-icon-wrap { background: rgba(139,92,246,0.2); }
-.trick-name {
-  font-family: var(--font-head);
-  font-size: 1rem;
-  color: var(--white);
-}
-.trick-desc {
-  font-size: 0.88rem;
-  color: rgba(245,243,255,0.65);
-  line-height: 1.65; text-align: center;
+.card-float span{font-size:0.8rem;line-height:1}
+@keyframes card-drift{
+  0%{transform:translate(0,0) rotate(var(--cr,0deg)) scale(1)}
+  50%{transform:translate(var(--cx,10px),var(--cy,-12px)) rotate(var(--cr2,5deg)) scale(1.03)}
+  100%{transform:translate(var(--cx2,-8px),var(--cy2,8px)) rotate(var(--cr3,-3deg)) scale(0.97)}
 }
 
-/* ══════════════════════════════════════════
-   EVENTS
-══════════════════════════════════════════ */
-#events {
-  background: rgba(109,40,217,0.04);
-  border-top: 1px solid rgba(139,92,246,0.1);
-  border-bottom: 1px solid rgba(139,92,246,0.1);
+/* ─── CONTACT ────────────────────────────────────── */
+#contact{text-align:center}
+.contact-inner{
+  display:flex;gap:56px;align-items:flex-start;
+  text-align:right;margin-top:60px;
 }
-.events-flex {
-  display: flex; gap: 80px; align-items: center;
+.contact-form-wrap{flex:1}
+.contact-side{flex:0 0 300px}
+.cform{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fl{font-size:0.74rem;color:rgba(244,241,255,0.4);font-weight:700;letter-spacing:1px}
+.fi,.fs,.fta{
+  background:rgba(124,58,237,0.06);
+  border:1px solid rgba(124,58,237,0.18);
+  border-radius:10px;padding:12px 14px;
+  color:var(--white);font-family:var(--bd);font-size:0.95rem;
+  outline:none;direction:rtl;text-align:right;
+  transition:border-color 0.2s,box-shadow 0.2s;
 }
-.events-left { flex: 1; }
-.events-cards { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-.event-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  padding: 32px 26px;
-  transition: transform 0.3s, border-color 0.3s, background 0.3s;
-  cursor: none; position: relative; overflow: hidden;
+.fi::placeholder,.fta::placeholder{color:rgba(244,241,255,0.18)}
+.fi:focus,.fs:focus,.fta:focus{border-color:rgba(124,58,237,0.45);box-shadow:0 0 0 3px rgba(124,58,237,0.12)}
+.fs option{background:var(--bg2);color:var(--white)}
+.fta{resize:vertical;min-height:110px}
+.form-submit{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 40px;
+  background:linear-gradient(135deg,var(--pu),#5b21b6);
+  color:#fff;font-family:var(--bd);font-size:1rem;font-weight:700;
+  border:none;border-radius:50px;cursor:none;
+  box-shadow:0 0 36px rgba(100,30,220,0.4);
+  transition:transform 0.2s,box-shadow 0.2s;width:100%;justify-content:center;
 }
-.event-card::before {
-  content: '';
-  position: absolute; top: 0; right: 0;
-  width: 60px; height: 60px;
-  background: radial-gradient(circle, rgba(139,92,246,0.2) 0%, transparent 70%);
-  border-radius: 0 var(--radius) 0 100%;
-  transition: width 0.4s, height 0.4s;
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(124,58,237,0.6)}
+.contact-wa-box{
+  background:rgba(37,211,102,0.05);
+  border:1px solid rgba(37,211,102,0.25);
+  border-radius:var(--r);padding:32px 24px;text-align:right;
+  margin-bottom:24px;
 }
-.event-card:hover { transform: translateY(-5px); border-color: rgba(139,92,246,0.4); background: rgba(139,92,246,0.08); }
-.event-card:hover::before { width: 100px; height: 100px; }
-.event-icon {
-  font-size: 2.2rem; margin-bottom: 14px; display: block;
+.cwa-title{font-family:var(--hd);font-size:1.15rem;color:var(--white);margin-bottom:8px;margin-top:12px}
+.cwa-sub{font-size:0.88rem;color:rgba(244,241,255,0.45);line-height:1.6;margin-bottom:22px}
+.cwa-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:13px 28px;background:var(--wa);color:#fff;
+  font-family:var(--bd);font-size:0.97rem;font-weight:700;
+  border-radius:50px;cursor:none;
+  transition:transform 0.2s,box-shadow 0.2s;
 }
-.event-title {
-  font-family: var(--font-head);
-  font-size: 1.1rem; color: var(--white); margin-bottom: 8px;
+.cwa-btn:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(37,211,102,0.4)}
+.contact-info-line{
+  display:flex;align-items:center;gap:12px;padding:16px 0;
+  border-bottom:1px solid rgba(124,58,237,0.1);
+  font-size:0.9rem;color:rgba(244,241,255,0.55);
 }
-.event-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.65; }
-
-/* ══════════════════════════════════════════
-   TESTIMONIALS
-══════════════════════════════════════════ */
-#testimonials { text-align: center; }
-.testi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px; margin-top: 56px;
-}
-.testi-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  padding: 36px 28px; text-align: right;
-  transition: transform 0.3s, border-color 0.3s;
-  position: relative; overflow: hidden;
-}
-.testi-card::after {
-  content: '"';
-  position: absolute; top: -10px; left: 20px;
-  font-size: 8rem; font-family: Georgia, serif;
-  color: rgba(139,92,246,0.07);
-  line-height: 1; pointer-events: none;
-}
-.testi-card:hover { transform: translateY(-4px); border-color: rgba(226,185,106,0.25); }
-.testi-stars {
-  display: flex; gap: 3px; margin-bottom: 18px;
-  font-size: 0; /* hide text, show via CSS */
-}
-.testi-stars::before {
-  content: '★★★★★';
-  font-size: 1rem;
-  color: var(--gold);
-  letter-spacing: 3px;
-}
-.testi-text {
-  font-size: 0.97rem;
-  color: rgba(245,243,255,0.72);
-  line-height: 1.8;
-  margin-bottom: 24px;
-  font-style: italic;
-  font-weight: 300;
-}
-.testi-author { display: flex; align-items: center; gap: 12px; }
-.testi-avatar {
-  width: 42px; height: 42px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--purple), #4c1d95);
-  border: 1.5px solid rgba(139,92,246,0.4);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-head); font-size: 1rem; color: #fff;
-  flex-shrink: 0;
-}
-.testi-name { font-size: 0.88rem; font-weight: 700; color: var(--white); }
-.testi-place { font-size: 0.75rem; color: var(--gray); margin-top: 2px; }
-
-/* ══════════════════════════════════════════
-   ABOUT
-══════════════════════════════════════════ */
-#about {
-  background: rgba(109,40,217,0.04);
-  border-top: 1px solid rgba(139,92,246,0.1);
-}
-.about-inner { display: flex; gap: 80px; align-items: center; }
-.about-img-wrap {
-  flex: 0 0 400px; position: relative;
-}
-.about-img-wrap img {
-  width: 100%; border-radius: 24px; object-fit: cover;
-  position: relative; z-index: 1;
-}
-.about-img-placeholder {
-  width: 100%; height: 500px; border-radius: 24px;
-  background: linear-gradient(160deg, #1e1040, #2d1b6e);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 5rem;
-  position: relative; z-index: 1;
-}
-.about-img-glow {
-  position: absolute;
-  inset: -20px;
-  background: radial-gradient(ellipse at center, rgba(109,40,217,0.3) 0%, transparent 70%);
-  border-radius: 40px;
-  z-index: 0;
-}
-.about-img-border {
-  position: absolute; inset: 0; border-radius: 24px; z-index: 2;
-  border: 1.5px solid transparent;
-  background: linear-gradient(135deg, rgba(139,92,246,0.5), rgba(226,185,106,0.3)) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: destination-out;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-.about-text { flex: 1; }
-.about-body {
-  font-size: 1.05rem; color: rgba(245,243,255,0.6);
-  line-height: 1.9; margin-bottom: 50px;
-  font-weight: 300;
-}
-.about-body strong { color: var(--gold); font-weight: 600; }
-.counters { display: flex; gap: 44px; flex-wrap: wrap; }
-.counter-item {
-  position: relative; padding-right: 0;
-}
-.counter-item::after {
-  content: '';
-  display: block; width: 24px; height: 2px;
-  background: linear-gradient(to left, var(--purple), transparent);
-  margin-top: 10px;
-}
-.counter-num {
-  font-family: var(--font-head);
-  font-size: 3rem; line-height: 1; display: block;
-  background: linear-gradient(135deg, var(--white), var(--purple-bright));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.counter-label {
-  font-size: 0.78rem; color: var(--gray);
-  letter-spacing: 1px; margin-top: 6px; display: block;
+.contact-info-line:last-of-type{border-bottom:none}
+.ci-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--pu-dim);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
 }
 
-/* ══════════════════════════════════════════
-   CONTACT
-══════════════════════════════════════════ */
-#contact { text-align: center; }
-.contact-inner {
-  display: flex; gap: 60px;
-  align-items: flex-start; text-align: right;
-  margin-top: 60px;
+/* ─── FOOTER ─────────────────────────────────────── */
+footer{
+  position:relative;z-index:2;
+  padding:56px 6% 32px;
+  border-top:1px solid rgba(124,58,237,0.1);
+  background:rgba(0,0,0,0.3);
 }
-.contact-form-wrap { flex: 1; }
-.contact-side { flex: 0 0 310px; }
-.contact-form { display: flex; flex-direction: column; gap: 16px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-label { font-size: 0.78rem; color: rgba(245,243,255,0.45); font-weight: 600; letter-spacing: 1px; }
-.form-input, .form-select, .form-textarea {
-  background: rgba(139,92,246,0.06);
-  border: 1px solid rgba(139,92,246,0.18);
-  border-radius: 12px;
-  padding: 13px 16px; color: var(--white);
-  font-family: var(--font-body); font-size: 0.97rem;
-  outline: none; direction: rtl; text-align: right;
-  transition: border-color 0.2s, box-shadow 0.2s;
+.footer-inner{
+  display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:24px;
 }
-.form-input::placeholder, .form-textarea::placeholder { color: rgba(245,243,255,0.2); }
-.form-input:focus, .form-select:focus, .form-textarea:focus {
-  border-color: var(--purple);
-  box-shadow: 0 0 0 3px rgba(139,92,246,0.15);
+.footer-logo{
+  font-family:var(--hd);font-size:1.1rem;color:var(--white);letter-spacing:1px;
 }
-.form-select option { background: #1a1040; color: var(--white); }
-.form-textarea { resize: vertical; min-height: 110px; }
-.btn-submit {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 17px 38px;
-  background: linear-gradient(135deg, var(--purple), #6d28d9);
-  color: #fff;
-  font-family: var(--font-body); font-size: 1.05rem; font-weight: 700;
-  border: none; border-radius: 50px; cursor: none; margin-top: 8px;
-  box-shadow: 0 0 40px rgba(109,40,217,0.4);
-  transition: transform 0.2s, box-shadow 0.2s;
-  position: relative; overflow: hidden;
-}
-.btn-submit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 60px rgba(139,92,246,0.6);
-}
-.btn-submit .ripple {
-  position: absolute; border-radius: 50%;
-  background: rgba(255,255,255,0.25);
-  animation: ripple-anim 0.6s linear;
-  pointer-events: none;
-}
-@keyframes ripple-anim {
-  from { width: 0; height: 0; opacity: 1; transform: translate(-50%,-50%); }
-  to   { width: 300px; height: 300px; opacity: 0; transform: translate(-50%,-50%); }
-}
-.form-success {
-  display: none; text-align: center; padding: 48px;
-  background: rgba(139,92,246,0.06);
-  border: 1px solid rgba(139,92,246,0.25);
-  border-radius: var(--radius);
-}
-.form-success h3 {
-  font-family: var(--font-head); font-size: 1.7rem;
-  color: var(--purple-bright); margin-bottom: 10px;
-}
-.contact-side-box {
-  background: rgba(139,92,246,0.06);
-  border: 1px solid rgba(139,92,246,0.2);
-  border-radius: var(--radius); padding: 36px 28px;
-}
-.contact-side-title {
-  font-family: var(--font-head); font-size: 1.3rem;
-  margin-bottom: 10px; color: var(--white);
-}
-.contact-side-desc {
-  font-size: 0.88rem; color: var(--gray);
-  margin-bottom: 28px; line-height: 1.65;
-}
-.btn-wa-big {
-  display: flex; align-items: center; justify-content: center; gap: 12px;
-  width: 100%; padding: 17px 28px;
-  background: var(--green-wa);
-  color: #fff; font-family: var(--font-body);
-  font-size: 1.05rem; font-weight: 700; border-radius: 14px;
-  transition: background 0.2s, transform 0.2s; margin-bottom: 30px;
-}
-.btn-wa-big:hover { background: #1ebe5a; transform: scale(1.02); }
-.btn-wa-big svg { width: 24px; height: 24px; fill: #fff; flex-shrink: 0; }
-.social-links { display: flex; gap: 10px; }
-.social-link {
-  width: 44px; height: 44px; border-radius: 10px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  display: flex; align-items: center; justify-content: center;
-  transition: border-color 0.2s, transform 0.2s, background 0.2s;
-}
-.social-link:hover {
-  border-color: rgba(139,92,246,0.4);
-  background: rgba(139,92,246,0.1);
-  transform: translateY(-3px);
-}
-.social-link svg { width: 19px; height: 19px; fill: rgba(245,243,255,0.6); }
-
-/* ══════════════════════════════════════════
-   FOOTER
-══════════════════════════════════════════ */
-footer {
-  position: relative; z-index: 2;
-  background: rgba(7,5,15,0.95);
-  border-top: 1px solid rgba(139,92,246,0.12);
-  padding: 52px 6% 28px;
-}
-.footer-inner {
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 28px; margin-bottom: 36px;
-}
-.footer-logo { font-family: var(--font-head); font-size: 1.3rem; color: var(--white); }
-.footer-logo span { color: var(--purple-bright); }
-.footer-nav { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
-.footer-nav a { font-size: 0.88rem; color: var(--gray); transition: color 0.2s; }
-.footer-nav a:hover { color: var(--white); }
-.footer-social { display: flex; gap: 10px; }
-.footer-bottom {
-  border-top: 1px solid rgba(139,92,246,0.08);
-  padding-top: 22px;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 12px;
-}
-.footer-copy { font-size: 0.8rem; color: rgba(245,243,255,0.2); }
-.footer-phone {
-  font-size: 0.9rem; color: var(--purple-bright);
-  font-family: var(--font-head); direction: ltr;
+.footer-logo span{color:var(--pu-l)}
+.footer-links{display:flex;gap:28px;list-style:none}
+.footer-links a{font-size:0.85rem;color:rgba(244,241,255,0.4);transition:color 0.2s}
+.footer-links a:hover{color:var(--white)}
+.footer-legal{
+  width:100%;text-align:center;
+  padding-top:32px;margin-top:32px;
+  border-top:1px solid rgba(124,58,237,0.08);
+  font-size:0.75rem;color:rgba(244,241,255,0.2);
 }
 
-/* ══════════════════════════════════════════
-   DIVIDERS
-══════════════════════════════════════════ */
-.purple-line {
-  height: 1px;
-  background: linear-gradient(to left, transparent, rgba(139,92,246,0.3), transparent);
+/* ─── MOBILE ─────────────────────────────────────── */
+@media(max-width:960px){
+  .hero-content{width:62%}
+  .about-inner{gap:48px}
+  .about-photo{flex:0 0 300px}
+  .contact-inner{flex-direction:column}
+  .contact-side{flex:unset;width:100%}
+  .tricks-grid{grid-template-columns:repeat(2,1fr)}
+  .nav-links{display:none}
 }
-
-/* ══════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════ */
-/* ── TABLET ── */
-@media (max-width: 960px) {
-  /* image still full bleed, darken slightly more for readability */
-  .hero-img-fade {
+@media(max-width:680px){
+  #hero{min-height:100svh;flex-direction:column;justify-content:flex-end;align-items:stretch}
+  .hero-fade{
     background:
-      linear-gradient(to left,
-        rgba(7,5,15,0.98) 0%,
-        rgba(7,5,15,0.88) 35%,
-        rgba(7,5,15,0.55) 60%,
-        rgba(7,5,15,0.1)  85%,
-        transparent 100%
-      ),
-      linear-gradient(to top, rgba(7,5,15,0.85) 0%, transparent 25%);
+      linear-gradient(to top,rgba(7,5,15,1) 0%,rgba(7,5,15,0.9) 35%,rgba(7,5,15,0.5) 60%,rgba(7,5,15,0.1) 100%),
+      linear-gradient(to bottom,rgba(7,5,15,0.55) 0%,transparent 18%);
   }
-  .hero-content { width: 60%; }
-  .about-inner { flex-direction: column-reverse; }
-  .about-img-wrap { flex: none; width: 100%; max-width: 400px; margin: 0 auto; }
-  .events-flex { flex-direction: column; gap: 50px; }
-  .contact-inner { flex-direction: column; }
-  .contact-side { flex: none; width: 100%; }
-  .testi-grid { grid-template-columns: 1fr; }
-  .tricks-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* ── MOBILE ── */
-@media (max-width: 680px) {
-  /* disable custom cursor on touch */
-  #cursor, #cursor-trail { display: none; }
-  body { cursor: auto; }
-  a, button { cursor: pointer; }
-
-  section { padding: 64px 5%; }
-
-  /* NAV */
-  nav { padding: 14px 5%; }
-  .nav-links { gap: 0; }
-  .nav-links li:not(:last-child) { display: none; }
-  .btn-wa-nav { padding: 7px 14px; font-size: 0.82rem; }
-  .nav-logo { font-size: 1rem; }
-
-  /* ── HERO MOBILE – like Glazer: image top half, text bottom ── */
-  #hero {
-    min-height: 100svh;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: stretch;
+  .hero-content{
+    position:relative;width:100%;
+    top:auto;right:auto;bottom:auto;
+    padding:0 5% 50px;text-align:center;
+    flex-shrink:0;margin-top:auto;
   }
-  .hero-img-side { inset: 0; }
-  .hero-img-side img,
-  .hero-img-side-placeholder {
-    object-position: top center;
+  .hero-btns{justify-content:center}
+  .hero-stats{justify-content:center}
+  .hero-eyebrow{justify-content:center}
+  .hero-tagline{margin-left:auto;margin-right:auto}
+  .about-inner{flex-direction:column}
+  .about-photo{flex:unset;width:100%}
+  .tricks-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .testi-cols{height:380px}
+  .testi-lane-b{display:none}
+  #shows-stage{height:auto}
+  #shows-stick{position:relative;height:auto;overflow:visible}
+  .shows-header{position:relative;right:auto;padding:24px 6% 0}
+  #shows-track{
+    position:relative;top:auto;transform:none;
+    flex-wrap:wrap;gap:16px;padding:24px 6% 32px;
   }
-  /* Strong bottom-up gradient so text is readable */
-  .hero-img-fade {
-    background:
-      linear-gradient(to top,
-        rgba(7,5,15,1)   0%,
-        rgba(7,5,15,0.9) 35%,
-        rgba(7,5,15,0.5) 60%,
-        rgba(7,5,15,0.1) 100%
-      ),
-      linear-gradient(to bottom,
-        rgba(7,5,15,0.55) 0%,
-        transparent 18%
-      );
-  }
-  /* Text panel sits at bottom over gradient */
-  .hero-content {
-    position: relative;
-    width: 100%;
-    top: auto; right: auto; bottom: auto;
-    padding: 0 5% 50px;
-    text-align: center;
-    flex-shrink: 0;
-    margin-top: auto;
-  }
-  .hero-eyebrow { justify-content: center; }
-  .hero-eyebrow::before { display: none; }
-  .hero-name {
-    font-size: clamp(4rem, 17vw, 5.5rem);
-    letter-spacing: -1px;
-    font-weight: 900;
-  }
-  .hero-subtitle-line { font-size: clamp(1.2rem, 5vw, 1.6rem); }
-  .hero-tagline { margin: 0 auto 32px; font-size: 1rem; }
-  .hero-btns { justify-content: center; flex-direction: column; align-items: center; gap: 12px; }
-  .btn-primary, .btn-secondary { width: 100%; max-width: 300px; justify-content: center; }
-  .hero-stats {
-    display: grid; grid-template-columns: repeat(3,1fr);
-    gap: 0; text-align: center;
-    border-top: 1px solid rgba(139,92,246,0.18);
-    padding-top: 24px; margin-top: 28px;
-  }
-  .hero-stat-num { font-size: 1.6rem; }
-  .counter-item::after { margin: 6px auto 0; }
-  .scroll-indicator { display: none; }
-
-  /* SOCIAL PROOF */
-  .proof-label { font-size: 0.62rem; }
-
-  /* SECTION */
-  .section-title { font-size: clamp(1.9rem, 8vw, 2.6rem); }
-  .section-eyebrow { justify-content: flex-start; }
-  .section-sub { font-size: 0.95rem; }
-
-  /* TRICKS */
-  .tricks-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .trick-card { height: 170px; }
-  .tricks-header { margin-bottom: 36px; }
-  .tricks-header .section-eyebrow { justify-content: center; }
-
-  /* EVENTS */
-  .events-cards { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .event-card { padding: 24px 18px; }
-  .event-icon { font-size: 1.8rem; margin-bottom: 10px; }
-  .event-title { font-size: 1rem; }
-
-  /* TESTIMONIALS */
-  .testi-grid { grid-template-columns: 1fr; gap: 14px; }
-  #testimonials .section-eyebrow { justify-content: center; }
-
-  /* ABOUT */
-  .about-img-wrap { max-width: 300px; }
-  .counters { gap: 20px; }
-  .counter-num { font-size: 2.3rem; }
-
-  /* CONTACT */
-  .form-row { grid-template-columns: 1fr; }
-  .contact-side { width: 100%; }
-  #contact .section-eyebrow { justify-content: center; }
-
-  /* FOOTER */
-  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .footer-nav { gap: 18px; }
-  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-
-  /* FLOAT WA – slightly smaller */
-  #float-wa { width: 54px; height: 54px; bottom: 22px; left: 18px; }
-  #float-wa svg { width: 28px; height: 28px; }
-}
-
-/* ── SMALL MOBILE (≤380px) ── */
-@media (max-width: 380px) {
-  .hero-name { font-size: 3.8rem; }
-  .tricks-grid { grid-template-columns: 1fr; }
-  .events-cards { grid-template-columns: 1fr; }
-  .hero-stats { grid-template-columns: repeat(3,1fr); gap: 0; }
-  .hero-stat-num { font-size: 1.4rem; }
+  .show-card{flex:0 0 100%;height:300px}
+  .giant-head{font-size:clamp(2rem,8vw,3.2rem)}
+  .sec{padding:80px 6%}
+  footer .footer-links{display:none}
+  #wa-btn{bottom:20px;left:20px;width:52px;height:52px}
 }
 </style>
 </head>
 <body>
 
-<!-- BACKGROUND ORBS -->
-<div id="bg-orbs">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+<!-- BG ORBS -->
+<div id="orbs">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
 </div>
 
 <!-- CURSOR -->
-<div id="cursor">
-  <svg viewBox="0 0 24 24" fill="none">
-    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-      stroke="#a78bfa" stroke-width="1.5" stroke-linejoin="round" fill="rgba(139,92,246,0.15)"/>
-  </svg>
-</div>
-<div id="cursor-trail"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
 
-<!-- FLOATING WHATSAPP -->
-<a id="float-wa" href="https://wa.me/972545203325" target="_blank" rel="noopener" title="WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+<!-- WA FLOAT -->
+<a id="wa-btn" href="https://wa.me/972501234567?text=היי%20נירו%2C%20אני%20רוצה%20לשמוע%20עוד%20על%20מופע%20לאירוע%20שלי" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <!-- NAV -->
-<nav id="main-nav">
-  <div class="nav-logo">נירו לוי <span>| אמן חושים</span></div>
+<nav id="nav">
+  <div class="nav-logo">נירו <span>לוי</span></div>
   <ul class="nav-links">
-    <li><a href="#about" class="hide-mobile">אודות</a></li>
-    <li><a href="#tricks" class="hide-mobile">מופעים</a></li>
-    <li><a href="#testimonials" class="hide-mobile">לקוחות</a></li>
-    <li><a href="#contact">צור קשר</a></li>
-    <li><a href="https://wa.me/972545203325" class="btn-wa-nav" target="_blank" rel="noopener">📱 WhatsApp</a></li>
+    <li><a href="#tricks">יכולות</a></li>
+    <li><a href="#shows-stage">אירועים</a></li>
+    <li><a href="#testimonials">המלצות</a></li>
+    <li><a href="#about">אודות</a></li>
+    <li><a href="#contact" class="btn-wa-nav">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      צרו קשר
+    </a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- ══════ HERO ══════ -->
 <section id="hero">
-  <canvas id="particles-canvas"></canvas>
-
-  <!-- Full-bleed image on the right -->
-  <div class="hero-img-side">
-    <img src="/assets/nir-hero.jpg" alt="נירו לוי" loading="eager"
-         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-    <div class="hero-img-side-placeholder" style="display:none;">🎩</div>
+  <div class="hero-img">
+    <img src="assets/nir-hero.jpg" alt="נירו לוי אמן חושים" onerror="this.parentElement.innerHTML='<div class=hero-img-fallback>🎩</div>'">
   </div>
-  <div class="hero-img-fade"></div>
 
-  <!-- Text content -->
+  <!-- floating playing cards -->
+  <div class="card-float" style="top:22%;left:42%;--cr:-14deg;--cr2:-8deg;--cr3:-20deg;--cx:12px;--cy:-18px;--cx2:-8px;--cy2:14px;--cd:16s;z-index:4"><span style="color:#c0392b">♥<br>A</span></div>
+  <div class="card-float" style="top:30%;left:38%;--cr:8deg;--cr2:14deg;--cr3:3deg;--cx:-10px;--cy:10px;--cx2:14px;--cy2:-8px;--cd:20s;z-index:4"><span style="color:#1a1a1a">♠<br>K</span></div>
+  <div class="card-float" style="top:55%;left:44%;--cr:-4deg;--cr2:-10deg;--cr3:6deg;--cx:8px;--cy:-8px;--cx2:-12px;--cy2:6px;--cd:12s;z-index:4"><span style="color:#c0392b">♦<br>Q</span></div>
+  <div class="card-float" style="top:68%;left:36%;--cr:18deg;--cr2:10deg;--cr3:22deg;--cx:-6px;--cy:12px;--cx2:10px;--cy2:-10px;--cd:18s;z-index:4"><span style="color:#1a1a1a">♣<br>J</span></div>
+
+  <div class="hero-fade"></div>
+
   <div class="hero-content">
-    <div class="hero-eyebrow reveal">אמן החושים מספר 1 בישראל</div>
-    <h1 class="hero-name reveal reveal-delay-1">
-      <span class="glitch" data-text="נירו">נירו</span><br>לוי
-    </h1>
-    <div class="hero-subtitle-line reveal reveal-delay-2">אמן חושים ומנטליסט</div>
-    <p class="hero-tagline reveal reveal-delay-3">
-      הוא יודע מה אתה חושב.<br>
-      <strong>לפני שחשבת את זה.</strong>
+    <div class="hero-eyebrow">אמן חושים ומנטליסט</div>
+    <h1 class="hero-name">נירו<br>לוי</h1>
+    <span class="hero-name-gold">הוא יודע מה אתה חושב.</span>
+    <p class="hero-tagline">
+      מופע שמשאיר את הקהל <strong>עם פה פתוח</strong>.<br>
+      קריאת מחשבות, גילוי סודות, ואנרגיה שלא תשכחו.
     </p>
-    <div class="hero-btns reveal reveal-delay-4">
-      <a href="#contact" class="btn-primary">סגור תאריך לאירוע ←</a>
-      <a href="https://wa.me/972545203325" class="btn-secondary" target="_blank" rel="noopener">📱 WhatsApp</a>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-main">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        לזמינות ומחירים
+      </a>
+      <a href="https://wa.me/972501234567" target="_blank" rel="noopener" class="btn-wa">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        וואטסאפ
+      </a>
     </div>
-    <div class="hero-stats reveal reveal-delay-5">
-      <div class="counter-item">
-        <span class="hero-stat-num"><span class="counter-num" data-target="500">0</span><span>+</span></span>
-        <span class="hero-stat-label">אירועים</span>
-      </div>
-      <div class="counter-item">
-        <span class="hero-stat-num"><span class="counter-num" data-target="10">0</span><span>+</span></span>
-        <span class="hero-stat-label">שנות ניסיון</span>
-      </div>
-      <div class="counter-item">
-        <span class="hero-stat-num"><span class="counter-num" data-target="10000">0</span><span>+</span></span>
-        <span class="hero-stat-label">אנשים שנדהמו</span>
-      </div>
+    <div class="hero-stats">
+      <div><span class="stat-num">500<em>+</em></span><span class="stat-lbl">מופעים בשנה</span></div>
+      <div><span class="stat-num">15<em>+</em></span><span class="stat-lbl">שנות ניסיון</span></div>
+      <div><span class="stat-num">5<em>K</em></span><span class="stat-lbl">אנשים המומים</span></div>
     </div>
   </div>
-
-  <div class="scroll-indicator reveal">
-    גלול למטה
+  <div class="hero-scroll">
     <div class="scroll-line"></div>
+    גלול למטה
   </div>
 </section>
 
-<!-- SOCIAL PROOF -->
-<div id="proof" class="reveal">
-  <p class="proof-label">בין לקוחותינו</p>
-  <div class="marquee-wrap">
-    <div class="marquee">
-      <span class="marquee-item">Intel</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">מכבי שירותי בריאות</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">רשת 13</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">קשת 12</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">בנק לאומי</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">סופר-פארם</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">רכבת ישראל</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">מזרחי טפחות</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">Intel</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">מכבי שירותי בריאות</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">רשת 13</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">קשת 12</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">בנק לאומי</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">סופר-פארם</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">רכבת ישראל</span><span class="marquee-sep">✦</span>
-      <span class="marquee-item">מזרחי טפחות</span><span class="marquee-sep">✦</span>
+<!-- ══════ PROOF BAR ══════ -->
+<div id="proof">
+  <div class="proof-label">הופיע ב</div>
+  <div class="mq-wrap">
+    <div class="mq">
+      <span class="mq-item">חתונות פרטיות</span><span class="mq-sep">◆</span>
+      <span class="mq-item">בר מצוות</span><span class="mq-sep">◆</span>
+      <span class="mq-item">אירועי חברה</span><span class="mq-sep">◆</span>
+      <span class="mq-item">כנסים ועסקים</span><span class="mq-sep">◆</span>
+      <span class="mq-item">מסיבות פרטיות</span><span class="mq-sep">◆</span>
+      <span class="mq-item">אירועי גיבוש</span><span class="mq-sep">◆</span>
+      <span class="mq-item">ימי הולדת VIP</span><span class="mq-sep">◆</span>
+      <span class="mq-item">הופעות במסעדות</span><span class="mq-sep">◆</span>
+      <!-- duplicate -->
+      <span class="mq-item">חתונות פרטיות</span><span class="mq-sep">◆</span>
+      <span class="mq-item">בר מצוות</span><span class="mq-sep">◆</span>
+      <span class="mq-item">אירועי חברה</span><span class="mq-sep">◆</span>
+      <span class="mq-item">כנסים ועסקים</span><span class="mq-sep">◆</span>
+      <span class="mq-item">מסיבות פרטיות</span><span class="mq-sep">◆</span>
+      <span class="mq-item">אירועי גיבוש</span><span class="mq-sep">◆</span>
+      <span class="mq-item">ימי הולדת VIP</span><span class="mq-sep">◆</span>
+      <span class="mq-item">הופעות במסעדות</span><span class="mq-sep">◆</span>
     </div>
   </div>
 </div>
 
-<!-- TRICKS -->
-<section id="tricks">
-  <div class="tricks-header" style="text-align:center;">
-    <div class="section-eyebrow reveal">מה ניר עושה</div>
-    <h2 class="section-title reveal reveal-delay-1">החוויה שתשאיר<br>את כולם <em>פעורי פה</em></h2>
-    <p class="section-sub reveal reveal-delay-2" style="margin:0 auto;">
-      כל טריק בנוי סביב האנשים שמולו. לא פשוט קסמים – רגע שאי אפשר לשכוח.
-    </p>
+<!-- ══════ TRICKS ══════ -->
+<section id="tricks" class="sec">
+  <div class="tricks-head rv">
+    <h2 class="giant-head">
+      <span class="line1">מה שנירו</span>
+      <span class="line2">עושה לך.<span style="display:none">.</span></span>
+    </h2>
+    <p class="sec-sub" style="margin-top:14px">אמן חושים שמשלב מנטליזם, קריאת שפת גוף, ואנרגיה שלא מוסברת.</p>
   </div>
   <div class="tricks-grid">
-    <div class="trick-card reveal reveal-delay-1">
-      <div class="trick-card-inner">
-        <div class="trick-front">
-          <div class="trick-icon-wrap">🕐</div>
-          <div class="trick-name">גניבת שעון</div>
+    <div class="trick-card rv">
+      <div class="trick-inner">
+        <div class="t-front">
+          <div class="t-icon">🧠</div>
+          <div class="t-name">קריאת מחשבות</div>
         </div>
-        <div class="trick-back">
-          <div class="trick-desc">ניר גונב את השעון מהיד שלך – ואתה לא מרגיש כלום. הקהל יצחק, ישתאה ויתבקש לחזור שוב.</div>
-        </div>
-      </div>
-    </div>
-    <div class="trick-card reveal reveal-delay-2">
-      <div class="trick-card-inner">
-        <div class="trick-front">
-          <div class="trick-icon-wrap">🃏</div>
-          <div class="trick-name">ריחוף קלפים</div>
-        </div>
-        <div class="trick-back">
-          <div class="trick-desc">קלפים עפים באוויר ובוחרים את הקלף הנכון ממש מול עיניך – בלי שניר נוגע בהם.</div>
+        <div class="t-back">
+          <div class="t-desc">נירו מגלה מה אתה חושב – מספרים, שמות, תמונות – ללא כל עזרה. לא אפשרי, אבל קורה.</div>
         </div>
       </div>
     </div>
-    <div class="trick-card reveal reveal-delay-3">
-      <div class="trick-card-inner">
-        <div class="trick-front">
-          <div class="trick-icon-wrap">💭</div>
-          <div class="trick-name">קריאת מחשבות</div>
+    <div class="trick-card rv">
+      <div class="trick-inner">
+        <div class="t-front">
+          <div class="t-icon">🃏</div>
+          <div class="t-name">קסמי קלפים</div>
         </div>
-        <div class="trick-back">
-          <div class="trick-desc">ניר אומר לך בדיוק מה חשבת – לפני שאמרת מילה אחת. גם אתה לא תאמין שזה קרה.</div>
-        </div>
-      </div>
-    </div>
-    <div class="trick-card reveal reveal-delay-1">
-      <div class="trick-card-inner">
-        <div class="trick-front">
-          <div class="trick-icon-wrap">❤️</div>
-          <div class="trick-name">ניחוש אהבה ראשונה</div>
-        </div>
-        <div class="trick-back">
-          <div class="trick-desc">ניר חושף פרטים אינטימיים שאף אחד לא יכול לדעת – שם, מקום, רגש. הקהל נדהם לחלוטין.</div>
+        <div class="t-back">
+          <div class="t-desc">בחר קלף, שים אותו בכיס שלך. הקלף שלך כבר מחכה בתוך ספר נעול שהוא לא נגע בו.</div>
         </div>
       </div>
     </div>
-    <div class="trick-card reveal reveal-delay-2">
-      <div class="trick-card-inner">
-        <div class="trick-front">
-          <div class="trick-icon-wrap">🔮</div>
-          <div class="trick-name">מנטליזם קיצוני</div>
+    <div class="trick-card rv">
+      <div class="trick-inner">
+        <div class="t-front">
+          <div class="t-icon">🔮</div>
+          <div class="t-name">חיזוי העתיד</div>
         </div>
-        <div class="trick-back">
-          <div class="trick-desc">ניחוש מספרים, מילים ואירועים מהעבר – ברמת דיוק שגורמת לאנשים לבדוק שאין מצלמות.</div>
-        </div>
-      </div>
-    </div>
-    <div class="trick-card reveal reveal-delay-3">
-      <div class="trick-card-inner">
-        <div class="trick-front">
-          <div class="trick-icon-wrap">🌀</div>
-          <div class="trick-name">אשליות חושים</div>
-        </div>
-        <div class="trick-back">
-          <div class="trick-desc">חוויה שמשבשת את המציאות – ניר מכוון את תשומת הלב ומשנה את מה שאתה רואה ומרגיש.</div>
+        <div class="t-back">
+          <div class="t-desc">נירו כותב ניבוי לפני שהאירוע מתחיל. בסוף הערב – הנייר נפתח ומה שכתוב שם מדויק לחלוטין.</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<div class="purple-line"></div>
-
-<!-- EVENTS -->
-<section id="events">
-  <div class="events-flex">
-    <div class="events-left">
-      <div class="section-eyebrow reveal">לכל סוג אירוע</div>
-      <h2 class="section-title reveal reveal-delay-1">מתאים לכל<br><em>אירוע</em></h2>
-      <p class="section-sub reveal reveal-delay-2">
-        ניר מותאם לקהלים שונים ולאווירות שונות.<br>
-        הצג גמיש, אינטרקטיבי ולא נשכח.
-      </p>
-    </div>
-    <div class="events-cards">
-      <div class="event-card reveal reveal-delay-1">
-        <span class="event-icon">🎉</span>
-        <h3 class="event-title">בר ובת מצוות</h3>
-        <p class="event-desc">חוויה שהנער/ת וכל האורחים ידברו עליה שנים. מותאם לכל הגילאים.</p>
-      </div>
-      <div class="event-card reveal reveal-delay-2">
-        <span class="event-icon">🥂</span>
-        <h3 class="event-title">מסיבות וחגיגות</h3>
-        <p class="event-desc">יום הולדת, חינה, נישואין – ניר הופך כל חגיגה לרגע בלתי נשכח.</p>
-      </div>
-      <div class="event-card reveal reveal-delay-3">
-        <span class="event-icon">🏢</span>
-        <h3 class="event-title">אירועי חברה</h3>
-        <p class="event-desc">כנסים, גיבוש, השקות מוצר – בידור מקצועי שמרשים לקוחות ועובדים.</p>
-      </div>
-      <div class="event-card reveal reveal-delay-4">
-        <span class="event-icon">🎭</span>
-        <h3 class="event-title">מופעים כלליים</h3>
-        <p class="event-desc">מופע עצמאי מלא 60-90 דקות – לתיאטראות, בתי ספר ומרכזי תרבות.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="purple-line"></div>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="section-eyebrow reveal">מה אומרים עלינו</div>
-  <h2 class="section-title reveal reveal-delay-1">לקוחות <em>מדברים</em></h2>
-  <div class="testi-grid">
-    <div class="testi-card reveal reveal-delay-1">
-      <div class="testi-stars"></div>
-      <p class="testi-text">"ניר הפך את בר המצווה של הבן שלי לחוויה שהאורחים מדברים עליה עד היום. כל אחד חשב שניר יודע עליו הכל – ממש פעורי פה."</p>
-      <div class="testi-author">
-        <div class="testi-avatar">מ</div>
-        <div>
-          <div class="testi-name">מיכל כ.</div>
-          <div class="testi-place">רחובות</div>
+    <div class="trick-card rv">
+      <div class="trick-inner">
+        <div class="t-front">
+          <div class="t-icon">👁️</div>
+          <div class="t-name">קריאת שפת גוף</div>
+        </div>
+        <div class="t-back">
+          <div class="t-desc">הוא רואה את האמת לפני שאתה אומר מילה. שקר או אמת – הוא תמיד יודע.</div>
         </div>
       </div>
     </div>
-    <div class="testi-card reveal reveal-delay-2">
-      <div class="testi-stars"></div>
-      <p class="testi-text">"הוא גנב את השעון שלי מהיד שלי ואני עוד לא מבין איך. כל עובדי החברה עמדו ופצחו בצחוק. חובה בכל אירוע חברה."</p>
-      <div class="testi-author">
-        <div class="testi-avatar">ד</div>
-        <div>
-          <div class="testi-name">דני מ.</div>
-          <div class="testi-place">מנהל HR, תל אביב</div>
+    <div class="trick-card rv">
+      <div class="trick-inner">
+        <div class="t-front">
+          <div class="t-icon">🎲</div>
+          <div class="t-name">ניחוש סטטיסטי</div>
+        </div>
+        <div class="t-back">
+          <div class="t-desc">מספר בין 1 ל-1000, רגש שחשבת עליו, צבע אהוב – נירו מגיע תמיד לנקודה המדויקת.</div>
         </div>
       </div>
     </div>
-    <div class="testi-card reveal reveal-delay-3">
-      <div class="testi-stars"></div>
-      <p class="testi-text">"כולם עמדו עם הפה פתוח. ניר הוא מהדברים הכי טובים שעשינו למסיבה. כל האורחים ביקשו את הפרטים שלו אחרי."</p>
-      <div class="testi-author">
-        <div class="testi-avatar">ש</div>
-        <div>
-          <div class="testi-name">שיר ל.</div>
-          <div class="testi-place">חיפה</div>
+    <div class="trick-card rv">
+      <div class="trick-inner">
+        <div class="t-front">
+          <div class="t-icon">🌊</div>
+          <div class="t-name">אנרגיה חושית</div>
+        </div>
+        <div class="t-back">
+          <div class="t-desc">מגע ידיים, ריח, תחושה – נירו מרגיש דברים שרק הם אמורים לדעת. לא מסביר, פשוט עובד.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="purple-line"></div>
+<!-- ══════ SHOWS (horizontal scrub) ══════ -->
+<div id="shows-stage">
+  <div id="shows-stick">
+    <div class="shows-header rv">
+      <h2 class="giant-head">
+        <span class="line1">לאיזה אירוע</span>
+        <span class="line2">מתאים נירו.</span>
+      </h2>
+    </div>
+    <div id="shows-track">
+      <div class="show-card">
+        <div class="show-card-img">
+          <img src="assets/nir-show.jpg" alt="חתונה" onerror="this.parentElement.innerHTML='<div class=show-card-fallback style=background:linear-gradient(135deg,#1a0e3d,#2d1b6e)>💍</div>'">
+        </div>
+        <div class="show-card-over">
+          <span class="sc-tag">חתונות</span>
+          <div class="sc-title">ליל מחשבות</div>
+          <div class="sc-desc">מופע קלאסי של 30 דקות שמשאיר את כל האורחים עם פה פתוח</div>
+        </div>
+      </div>
+      <div class="show-card">
+        <div class="show-card-img">
+          <div class="show-card-fallback" style="background:linear-gradient(135deg,#0c1a3d,#1b2d6e)">🎂</div>
+        </div>
+        <div class="show-card-over">
+          <span class="sc-tag">בר מצוות</span>
+          <div class="sc-title">הבמה שלך</div>
+          <div class="sc-desc">מופע שמתמקד בחגיגה ומשלב את הבר/בת מצווה באופן אישי</div>
+        </div>
+      </div>
+      <div class="show-card">
+        <div class="show-card-img">
+          <div class="show-card-fallback" style="background:linear-gradient(135deg,#1a1a0e,#2d2b1b)">💼</div>
+        </div>
+        <div class="show-card-over">
+          <span class="sc-tag">אירועי חברה</span>
+          <div class="sc-title">חוויה עסקית</div>
+          <div class="sc-desc">מופע קבוצתי מותאם לקהל עסקי עם משחקי מנטליזם קורפורטיבי</div>
+        </div>
+      </div>
+      <div class="show-card">
+        <div class="show-card-img">
+          <div class="show-card-fallback" style="background:linear-gradient(135deg,#0e1a1a,#1b2d2b)">🏢</div>
+        </div>
+        <div class="show-card-over">
+          <span class="sc-tag">כנסים</span>
+          <div class="sc-title">Stage Performance</div>
+          <div class="sc-desc">מופע בימתי לקהל גדול — עד 1000 איש — עם אפקטים מרהיבים</div>
+        </div>
+      </div>
+      <div class="show-card">
+        <div class="show-card-img">
+          <div class="show-card-fallback" style="background:linear-gradient(135deg,#1a0a1a,#2d1b2d)">🥂</div>
+        </div>
+        <div class="show-card-over">
+          <span class="sc-tag">פרטי VIP</span>
+          <div class="sc-title">Close-Up אינטימי</div>
+          <div class="sc-desc">מופע אינטימי שולחני לקבוצות קטנות — הניסיון המלא מקרוב</div>
+        </div>
+      </div>
+      <div class="show-card">
+        <div class="show-card-img">
+          <div class="show-card-fallback" style="background:linear-gradient(135deg,#0a1a0a,#1b2d1b)">🎮</div>
+        </div>
+        <div class="show-card-over">
+          <span class="sc-tag">גיבוש צוות</span>
+          <div class="sc-title">חוויה קבוצתית</div>
+          <div class="sc-desc">משחקי מנטליזם קבוצתיים שמגבשים את הצוות ויוצרים זיכרון משותף</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- ABOUT -->
-<section id="about">
+<!-- ══════ TESTIMONIALS ══════ -->
+<section id="testimonials" class="sec">
+  <div class="rv">
+    <h2 class="giant-head">
+      <span class="line1">מה אומרים</span>
+      <span class="line2">עליו.</span>
+    </h2>
+    <p class="sec-sub" style="margin-top:14px">מאות אירועים. אלפי חיוכים. עוד אחד מחכה לך.</p>
+  </div>
+  <div class="testi-cols">
+    <!-- lane A (up) -->
+    <div class="testi-lane testi-lane-a">
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"הייתי סקפטי לחלוטין לפני שראיתי. אחרי 5 דקות של המופע של נירו, כל האמונות שלי השתנו. הוא פשוט לא ייאמן."</p><div class="tc-author"><div class="tc-avatar">ד</div><div><div class="tc-name">דניאל כ.</div><div class="tc-place">חתונה, תל אביב</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"כל האורחים דיברו על נירו שבוע אחרי האירוע. בחרת טוב בחיים שלי!"</p><div class="tc-author"><div class="tc-avatar">מ</div><div><div class="tc-name">מיכל ר.</div><div class="tc-place">בת מצווה, הרצליה</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"נירו הכניס אנרגיה שלא ידענו שחסרה לנו. הצוות עוד מדבר על הערב הזה."</p><div class="tc-author"><div class="tc-avatar">א</div><div><div class="tc-name">אריאל ש.</div><div class="tc-place">אירוע חברה, ת"א</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"ידעתי שהמופע יהיה טוב, אבל לא ידעתי שאחרי שלוש שנים עוד נדבר עליו. נירו – תודה!"</p><div class="tc-author"><div class="tc-avatar">ר</div><div><div class="tc-name">רחל פ.</div><div class="tc-place">יום הולדת 40, רמת גן</div></div></div></div>
+      <!-- duplicate for seamless -->
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"הייתי סקפטי לחלוטין לפני שראיתי. אחרי 5 דקות של המופע של נירו, כל האמונות שלי השתנו. הוא פשוט לא ייאמן."</p><div class="tc-author"><div class="tc-avatar">ד</div><div><div class="tc-name">דניאל כ.</div><div class="tc-place">חתונה, תל אביב</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"כל האורחים דיברו על נירו שבוע אחרי האירוע. בחרת טוב בחיים שלי!"</p><div class="tc-author"><div class="tc-avatar">מ</div><div><div class="tc-name">מיכל ר.</div><div class="tc-place">בת מצווה, הרצליה</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"נירו הכניס אנרגיה שלא ידענו שחסרה לנו. הצוות עוד מדבר על הערב הזה."</p><div class="tc-author"><div class="tc-avatar">א</div><div><div class="tc-name">אריאל ש.</div><div class="tc-place">אירוע חברה, ת"א</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"ידעתי שהמופע יהיה טוב, אבל לא ידעתי שאחרי שלוש שנים עוד נדבר עליו. נירו – תודה!"</p><div class="tc-author"><div class="tc-avatar">ר</div><div><div class="tc-name">רחל פ.</div><div class="tc-place">יום הולדת 40, רמת גן</div></div></div></div>
+    </div>
+    <!-- lane B (down) -->
+    <div class="testi-lane testi-lane-b">
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"המנכ"ל שלנו הוא בן אדם מאוד קשוח. כשנירו ניחש את המספר הסודי שלו הוא עמד עם פה פתוח."</p><div class="tc-author"><div class="tc-avatar">נ</div><div><div class="tc-name">נועה מ.</div><div class="tc-place">כנס שנתי, ירושלים</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"Close-up שהיה לו ליד השולחן שלנו – כולנו לא ישנינו הלילה. בחיים לא ראיתי כזה דבר."</p><div class="tc-author"><div class="tc-avatar">ג</div><div><div class="tc-name">גיל ה.</div><div class="tc-place">מסיבת VIP, קיסריה</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"הבן שלי בן ה-13 עוד מספר לחברים. נירו הפך את הבר מצווה לחוויה שהוא לא ישכח לעולם."</p><div class="tc-author"><div class="tc-avatar">ע</div><div><div class="tc-name">עמית ל.</div><div class="tc-place">בר מצווה, נתניה</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"סיפרתי לחברים ולא האמינו לי. אז הזמנו אותו שוב לאירוע הבא, ועכשיו הם מאמינים."</p><div class="tc-author"><div class="tc-avatar">ל</div><div><div class="tc-name">לימור כ.</div><div class="tc-place">מסיבת בית, רעננה</div></div></div></div>
+      <!-- duplicate -->
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"המנכ"ל שלנו הוא בן אדם מאוד קשוח. כשנירו ניחש את המספר הסודי שלו הוא עמד עם פה פתוח."</p><div class="tc-author"><div class="tc-avatar">נ</div><div><div class="tc-name">נועה מ.</div><div class="tc-place">כנס שנתי, ירושלים</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"Close-up שהיה לו ליד השולחן שלנו – כולנו לא ישנינו הלילה. בחיים לא ראיתי כזה דבר."</p><div class="tc-author"><div class="tc-avatar">ג</div><div><div class="tc-name">גיל ה.</div><div class="tc-place">מסיבת VIP, קיסריה</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"הבן שלי בן ה-13 עוד מספר לחברים. נירו הפך את הבר מצווה לחוויה שהוא לא ישכח לעולם."</p><div class="tc-author"><div class="tc-avatar">ע</div><div><div class="tc-name">עמית ל.</div><div class="tc-place">בר מצווה, נתניה</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars">★★★★★</div><p class="tc-text">"סיפרתי לחברים ולא האמינו לי. אז הזמנו אותו שוב לאירוע הבא, ועכשיו הם מאמינים."</p><div class="tc-author"><div class="tc-avatar">ל</div><div><div class="tc-name">לימור כ.</div><div class="tc-place">מסיבת בית, רעננה</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ ABOUT ══════ -->
+<section id="about" class="sec">
   <div class="about-inner">
-    <div class="about-img-wrap reveal">
-      <div class="about-img-glow"></div>
-      <img src="/assets/nir-full.jpg" alt="נירו לוי"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" loading="lazy">
-      <div class="about-img-placeholder" style="display:none;">🎩</div>
-      <div class="about-img-border"></div>
+    <div class="about-photo rv" id="about-photo">
+      <div class="about-glow"></div>
+      <img src="assets/nir-full.jpg" alt="נירו לוי" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="about-photo-fallback" style="display:none">🎩</div>
+      <div class="about-border"></div>
     </div>
     <div class="about-text">
-      <div class="section-eyebrow reveal">הסיפור מאחורי הקסם</div>
-      <h2 class="section-title reveal reveal-delay-1">מי זה <em>נירו לוי?</em></h2>
-      <p class="about-body reveal reveal-delay-2">
-        ניר לוי הוא אמן חושים ומנטליסט עם ניסיון של <strong>מעל 10 שנים</strong>.
-        הוא מופיע בפני אלפי אנשים בשנה – ממסיבות פרטיות ועד אירועי ענק.
-        הסוד שלו? לא קסמים. <strong>חיבור אמיתי עם האנשים שמולו.</strong><br><br>
-        ניר השתלם בגישות מנטליזם מתקדמות בארץ ובחו"ל, ועובד עם מיטב הלקוחות
-        הפרטיים והעסקיים. כל הופעה מותאמת אישית לקהל ולאווירה.
+      <h2 class="giant-head rv">
+        <span class="line1">מי זה</span>
+        <span class="line2">נירו.</span>
+      </h2>
+      <p class="about-body rv" style="margin-top:24px">
+        נירו לוי הוא <strong>אמן חושים ומנטליסט</strong> עם למעלה מ-15 שנות ניסיון.<br><br>
+        הוא לא עושה "קסמים". הוא יוצר <strong>חוויה</strong> – שמשנה את הדרך שבה אנשים תופסים את המציאות.
+        קריאת מחשבות, חיזוי, שפת גוף, ואנרגיה שאין לה הסבר הגיוני.<br><br>
+        נירו הופיע ב<strong>מאות אירועים</strong> ברחבי הארץ, מחתונות פרטיות ועד כנסים בינלאומיים.
       </p>
-      <div class="counters reveal reveal-delay-3">
-        <div class="counter-item">
-          <span class="counter-num" data-target="500">0</span>
-          <span class="counter-label">אירועים</span>
-        </div>
-        <div class="counter-item">
-          <span class="counter-num" data-target="10">0</span>
-          <span class="counter-label">שנות ניסיון</span>
-        </div>
-        <div class="counter-item">
-          <span class="counter-num" data-target="10000">0</span>
-          <span class="counter-label">אנשים שנדהמו</span>
-        </div>
+      <div class="counters rv">
+        <div class="cnt"><span class="cnt-n">500+</span><span class="cnt-l">מופעים בשנה</span></div>
+        <div class="cnt"><span class="cnt-n">15+</span><span class="cnt-l">שנות ניסיון</span></div>
+        <div class="cnt"><span class="cnt-n">98%</span><span class="cnt-l">לקוחות חוזרים</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="purple-line"></div>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-eyebrow reveal" style="justify-content:center;">מוכן לסגור תאריך?</div>
-  <h2 class="section-title reveal reveal-delay-1" style="text-align:center;">מוכן לגרום לכולם<br><em>להתגלגל?</em></h2>
-  <p class="section-sub reveal reveal-delay-2" style="margin:0 auto 0; text-align:center;">
-    השאר פרטים ונחזור אליך תוך 24 שעות עם הצעה מותאמת.
-  </p>
-
+<!-- ══════ CONTACT ══════ -->
+<section id="contact" class="sec">
+  <div class="rv" style="text-align:center;margin-bottom:0">
+    <h2 class="giant-head" style="text-align:center">
+      <span class="line1">בואו</span>
+      <span class="line2">נדבר.</span>
+    </h2>
+    <p class="sec-sub" style="max-width:480px;margin:14px auto 0">ספרו לנו על האירוע ונחזור אליכם בהקדם עם מחיר וזמינות.</p>
+  </div>
   <div class="contact-inner">
-    <div class="contact-form-wrap reveal">
-      <form class="contact-form" id="contact-form" novalidate>
+    <div class="contact-form-wrap rv">
+      <form class="cform" id="cform" onsubmit="return handleSubmit(event)">
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="name">שם מלא</label>
-            <input class="form-input" type="text" id="name" placeholder="ישראל ישראלי" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="phone">טלפון</label>
-            <input class="form-input" type="tel" id="phone" placeholder="050-0000000" required>
-          </div>
+          <div class="fg"><label class="fl">שם מלא</label><input class="fi" type="text" placeholder="ישראל ישראלי" required></div>
+          <div class="fg"><label class="fl">טלפון</label><input class="fi" type="tel" placeholder="050-0000000" required></div>
+        </div>
+        <div class="fg"><label class="fl">אימייל</label><input class="fi" type="email" placeholder="your@email.com"></div>
+        <div class="fg">
+          <label class="fl">סוג האירוע</label>
+          <select class="fs">
+            <option value="">בחרו סוג אירוע</option>
+            <option>חתונה</option>
+            <option>בר / בת מצווה</option>
+            <option>אירוע חברה</option>
+            <option>כנס / כנסייה</option>
+            <option>מסיבה פרטית</option>
+            <option>אחר</option>
+          </select>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="event-type">סוג אירוע</label>
-            <select class="form-select" id="event-type">
-              <option value="" disabled selected>בחר...</option>
-              <option>בר / בת מצווה</option>
-              <option>חתונה</option>
-              <option>מסיבת חברה</option>
-              <option>אירוע עסקי</option>
-              <option>מופע כללי</option>
-              <option>אחר</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="event-date">תאריך משוער</label>
-            <input class="form-input" type="date" id="event-date">
-          </div>
+          <div class="fg"><label class="fl">תאריך משוער</label><input class="fi" type="text" placeholder="חודש / שנה"></div>
+          <div class="fg"><label class="fl">מספר אורחים</label><input class="fi" type="text" placeholder="50–300"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="message">הודעה חופשית</label>
-          <textarea class="form-textarea" id="message" placeholder="ספר לי על האירוע שלך..."></textarea>
-        </div>
-        <button class="btn-submit" type="submit" id="submit-btn">
-          <span>שלח פנייה</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-          </svg>
+        <div class="fg"><label class="fl">פרטים נוספים</label><textarea class="fta" placeholder="ספרו לנו קצת על האירוע..."></textarea></div>
+        <button type="submit" class="form-submit">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          שלחו פנייה
         </button>
       </form>
-      <div class="form-success" id="form-success">
-        <div style="font-size:3rem;margin-bottom:16px;">✨</div>
-        <h3>הפנייה נשלחה!</h3>
-        <p style="color:var(--gray);margin-top:8px;font-size:0.95rem;">ניר יחזור אליך תוך 24 שעות. נשמח לשמוע עליך!</p>
-      </div>
     </div>
-
-    <div class="contact-side reveal reveal-delay-2">
-      <div class="contact-side-box">
-        <h3 class="contact-side-title">מעדיף לדבר ישירות?</h3>
-        <p class="contact-side-desc">שלח הודעה ב-WhatsApp ותקבל מענה מהיר. ניר זמין לכל שאלה.</p>
-        <a href="https://wa.me/972545203325" class="btn-wa-big" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          שלח הודעה עכשיו
+    <div class="contact-side rv">
+      <div class="contact-wa-box">
+        <div style="font-size:2.2rem">💬</div>
+        <div class="cwa-title">מעדיפים וואטסאפ?</div>
+        <div class="cwa-sub">נירו עונה אישית. בדרך כלל תוך שעה.</div>
+        <a href="https://wa.me/972501234567?text=היי%20נירו%2C%20אני%20מעוניין%2Fת%20לשמוע%20על%20מופע%20לאירוע%20שלי" target="_blank" rel="noopener" class="cwa-btn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          פתחו שיחה
         </a>
-        <div class="social-links">
-          <a href="#" class="social-link" title="Instagram" aria-label="Instagram">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          </a>
-          <a href="#" class="social-link" title="TikTok" aria-label="TikTok">
-            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.53V6.77a4.85 4.85 0 01-1.01-.08z"/></svg>
-          </a>
-          <a href="#" class="social-link" title="Facebook" aria-label="Facebook">
-            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </a>
-        </div>
+      </div>
+      <div class="contact-info-line">
+        <div class="ci-icon">📍</div>
+        <span>זמין בכל הארץ</span>
+      </div>
+      <div class="contact-info-line">
+        <div class="ci-icon">⏱️</div>
+        <span>מופע: 30–90 דקות</span>
+      </div>
+      <div class="contact-info-line">
+        <div class="ci-icon">🎯</div>
+        <span>מותאם אישית לכל אירוע</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══════ FOOTER ══════ -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">נירו לוי <span>| אמן חושים</span></div>
-    <ul class="footer-nav">
+    <div class="footer-logo">נירו <span>לוי</span> | אמן חושים</div>
+    <ul class="footer-links">
+      <li><a href="#tricks">יכולות</a></li>
+      <li><a href="#shows-stage">אירועים</a></li>
+      <li><a href="#testimonials">המלצות</a></li>
       <li><a href="#about">אודות</a></li>
-      <li><a href="#tricks">מופעים</a></li>
-      <li><a href="#events">אירועים</a></li>
-      <li><a href="#testimonials">לקוחות</a></li>
-      <li><a href="#contact">צור קשר</a></li>
+      <li><a href="#contact">צרו קשר</a></li>
     </ul>
-    <div class="footer-social">
-      <a href="#" class="social-link" style="border-color:rgba(139,92,246,0.15);">
-        <svg viewBox="0 0 24 24" fill="rgba(245,243,255,0.4)"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-      </a>
-      <a href="#" class="social-link" style="border-color:rgba(139,92,246,0.15);">
-        <svg viewBox="0 0 24 24" fill="rgba(245,243,255,0.4)"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.53V6.77a4.85 4.85 0 01-1.01-.08z"/></svg>
-      </a>
-      <a href="https://wa.me/972545203325" class="social-link" style="border-color:rgba(139,92,246,0.15);" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="rgba(245,243,255,0.4)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-      </a>
-    </div>
   </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2025 נירו לוי אמן חושים. כל הזכויות שמורות.</span>
-    <a href="tel:0545203325" class="footer-phone">054-520-3325</a>
-  </div>
+  <div class="footer-legal">© 2025 נירו לוי. כל הזכויות שמורות.</div>
 </footer>
 
-<!-- ══════════════════════════════════════════
-     JAVASCRIPT
-══════════════════════════════════════════ -->
 <script>
-/* CURSOR */
-const cursor = document.getElementById('cursor');
-const trail  = document.getElementById('cursor-trail');
+// ── GSAP + ScrollTrigger setup ──────────────────
+gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
+
+// ── NAV scroll state ────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── Cursor ──────────────────────────────────────
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
 let mx = 0, my = 0;
 document.addEventListener('mousemove', e => {
   mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-  setTimeout(() => { trail.style.left = mx + 'px'; trail.style.top = my + 'px'; }, 90);
+  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
 });
-document.addEventListener('mousedown', () => cursor.style.transform = 'translate(-50%,-50%) scale(0.65)');
-document.addEventListener('mouseup',   () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
-
-/* NAV */
-const nav = document.getElementById('main-nav');
-window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
-
-/* PARTICLES */
-(function() {
-  const canvas = document.getElementById('particles-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, pts = [];
-  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize, { passive: true });
-  class P {
-    constructor() { this.init(true); }
-    init(rand) {
-      this.x  = Math.random() * W;
-      this.y  = rand ? Math.random() * H : H + 5;
-      this.vx = (Math.random() - 0.5) * 0.3;
-      this.vy = -(Math.random() * 0.5 + 0.15);
-      this.r  = Math.random() * 1.4 + 0.3;
-      this.a  = Math.random() * 0.5 + 0.1;
-      this.c  = Math.random() > 0.8 ? '#a78bfa' : Math.random() > 0.5 ? '#ffffff' : '#e2b96a';
-    }
-    update() { this.x += this.vx; this.y += this.vy; if (this.y < -5) this.init(false); }
-    draw() {
-      ctx.save(); ctx.globalAlpha = this.a; ctx.fillStyle = this.c;
-      ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2); ctx.fill();
-      ctx.restore();
-    }
-  }
-  for (let i = 0; i < 120; i++) pts.push(new P());
-  function loop() { ctx.clearRect(0,0,W,H); pts.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(loop); }
-  loop();
-})();
-
-/* REVEAL */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-/* COUNTERS */
-function animCounter(el) {
-  const target = +el.dataset.target;
-  const dur = 2000;
-  const start = performance.now();
-  const tick = now => {
-    const p = Math.min((now - start) / dur, 1);
-    const ease = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.floor(ease * target).toLocaleString() + '+';
-    if (p < 1) requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
+function animRing() {
+  const rx = parseFloat(ring.style.left || 0);
+  const ry = parseFloat(ring.style.top || 0);
+  ring.style.left = (rx + (mx - rx) * 0.15) + 'px';
+  ring.style.top  = (ry + (my - ry) * 0.15) + 'px';
+  requestAnimationFrame(animRing);
 }
-const cObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { animCounter(e.target); cObs.unobserve(e.target); } });
-}, { threshold: 0.5 });
-document.querySelectorAll('.counter-num').forEach(el => cObs.observe(el));
-
-/* FORM */
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const btn = this.querySelector('.btn-submit');
-  btn.innerHTML = '<span>שולח...</span>';
-  btn.disabled = true;
-  setTimeout(() => {
-    this.style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-  }, 1100);
+animRing();
+document.querySelectorAll('a,button').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.style.transform = 'translate(-50%,-50%) scale(2.5)');
+  el.addEventListener('mouseleave', () => cur.style.transform = 'translate(-50%,-50%) scale(1)');
 });
 
-/* RIPPLE */
-document.getElementById('submit-btn').addEventListener('click', function(e) {
-  const r = document.createElement('span');
-  r.className = 'ripple';
-  const rect = this.getBoundingClientRect();
-  r.style.left = (e.clientX - rect.left) + 'px';
-  r.style.top  = (e.clientY - rect.top)  + 'px';
-  this.appendChild(r);
-  setTimeout(() => r.remove(), 650);
+// ── Reveal (.rv) with GSAP ──────────────────────
+document.querySelectorAll('.rv').forEach((el, i) => {
+  gsap.fromTo(el,
+    { opacity: 0, y: 36 },
+    {
+      opacity: 1, y: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      immediateRender: false,
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 88%',
+        once: true
+      },
+      delay: (i % 4) * 0.08
+    }
+  );
 });
 
-/* SMOOTH SCROLL */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+// ── Shows horizontal scrub ──────────────────────
+const isMobile = () => window.innerWidth <= 680;
+
+function initShowsScrub() {
+  if (isMobile()) return;
+  const track = document.getElementById('shows-track');
+  const stage = document.getElementById('shows-stage');
+  const travel = () => -(track.scrollWidth - window.innerWidth);
+  const tween = gsap.to(track, {
+    x: travel,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: stage,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 1.2,
+      invalidateOnRefresh: true
+    }
   });
-});
+}
+initShowsScrub();
+
+// ── About photo parallax ────────────────────────
+if (!isMobile()) {
+  const photo = document.getElementById('about-photo');
+  if (photo) {
+    gsap.fromTo(photo,
+      { y: 40 },
+      {
+        y: -40,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#about',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.5
+        }
+      }
+    );
+  }
+}
+
+// ── Form submit ────────────────────────────────
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = '✓ הפנייה נשלחה!';
+  btn.style.background = 'linear-gradient(135deg,#25d366,#1da851)';
+  setTimeout(() => {
+    btn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg> שלחו פנייה';
+    btn.style.background = '';
+    e.target.reset();
+  }, 4000);
+  return false;
+}
 </script>
 </body>
 </html>
