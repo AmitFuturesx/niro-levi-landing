@@ -672,7 +672,7 @@
   /* ── PAGE: booking form → WhatsApp with a prefilled message (no backend) ── */
   function initBooking(form) {
     var name = $('#f-name', form), phone = $('#f-phone', form), date = $('#f-date', form), btn = $('.booking__submit', form), label = $('[data-booking-label]', form);
-    var WA = 'https://wa.me/972503822282'; /* TODO: confirm number */
+    var WA = 'https://wa.me/972545203225';
     function err(input, id, bad) { var e = document.getElementById(id); if (e) e.hidden = !bad; input.classList.toggle('is-invalid', bad); input.setAttribute('aria-invalid', bad ? 'true' : 'false'); }
     function okPhone(v) { var d = v.replace(/\D/g, ''); if (d.indexOf('972') === 0) d = '0' + d.slice(3); return d.length === 9 || d.length === 10; }
     [name, phone].forEach(function (i) { i.addEventListener('input', function () { if (i.classList.contains('is-invalid')) err(i, i === name ? 'e-name' : 'e-phone', false); }); });
